@@ -12,32 +12,45 @@
 # 3. Support mocap android L release tag add
 # ----------------------------------------------------------------------------
 # 0.2
-# 1. Original function support with mocap bodypack release
+# 1. Original function support mocap bodypack release
 # 2. Add script version number
 # ----------------------------------------------------------------------------
-SCRIPT_VERSION=0.2
+# 0.3
+# 1. Original function support mocap tracker release
+# 2. Update help message
+# 3. Minor fix
+# ----------------------------------------------------------------------------
+SCRIPT_VERSION=0.3
 
 # Set debug flag
 DEBUG=""
 
-MOCAP_DIR=$HOME/share/CodeBase/MoCap
+MOCAP_DIR=$HOME/share/CodeBase/MoCap # --> Modify this for your usage
 
 # MoCap Android L related information
-L_DIR=$MOCAP_DIR/mocap-android-l.git
+L_DIR=$MOCAP_DIR/mocap-android-l.git # --> Modify this for your usage
 L_VERSION_DIR=$L_DIR/build/tools
 L_VERSION_FILE=buildinfo.sh
 L_VERSION_TARGET="BUILD_SWVERSION1="
 
 # MoCap bodypack related information
-BODYPACK_DIR=$MOCAP_DIR/mocap-bodypack.git
+BODYPACK_DIR=$MOCAP_DIR/mocap-bodypack.git # --> Modify this for your usage
 BODYPACK_VERSION_DIR=$BODYPACK_DIR/Src
 BODYPACK_VERSION_FILE=debug.c
 BODYPACK_VERSION_TARGET1="FIRMWARE_VERSION_MAJOR"
 BODYPACK_VERSION_TARGET2="FIRMWARE_VERSION_MINOR"
 
+# MoCap tracker related information
+TRACKER_DIR=$MOCAP_DIR/mocap-tracker.git # --> Modify this for your usage
+TRACKER_VERSION_DIR=$TRACKER_DIR/Src
+TRACKER_VERSION_FILE=debug.c
+TRACKER_VERSION_TARGET1="FIRMWARE_VERSION_MAJOR"
+TRACKER_VERSION_TARGET2="FIRMWARE_VERSION_MINOR"
+
 GIT_ARRAY=( \
     $L_DIR,$L_VERSION_DIR,$L_VERSION_FILE,$L_VERSION_TARGET \
     $BODYPACK_DIR,$BODYPACK_VERSION_DIR,$BODYPACK_VERSION_FILE,$BODYPACK_VERSION_TARGET1,$BODYPACK_VERSION_TARGET2 \
+    $TRACKER_DIR,$TRACKER_VERSION_DIR,$TRACKER_VERSION_FILE,$TRACKER_VERSION_TARGET1,$TRACKER_VERSION_TARGET2 \
 )
 
 VERSION_DIR=""
@@ -49,9 +62,9 @@ function show_help() {
     ME=`basename $0`
     echo "$ME -c [version] -m [version] -t [version] [-a [version]] -v"
     echo "option:"
-    echo "  -m [version]: modify verison to $VERSION_FILE"
+    echo "  -m [version]: Update new version to related file"
     echo "  -c [version]: commit new version"
-    echo "  -t [version]: tag new version to this release"
+    echo "  -t [version]: tag new version to last release"
     echo "  -a [verison]: do all the task above:"
     echo "                1. Modify verson."
     echo "                2. Commit new version."
@@ -66,7 +79,7 @@ check_path() {
 	# Parse GIT_ARRAY index
         LOCAL_ARRAY=(`echo ${GIT_ARRAY[$index]}|sed 's/,/ /g'`)
 
-	# Check Correct git repository
+	# Check correct git repository
         # LOCAL_ARRAY[0] is dir to git source
         GIT_PATH=`pwd|grep ${LOCAL_ARRAY[0]}`
         [ "$GIT_PATH" == "" ] && continue
@@ -96,7 +109,7 @@ version_modify_android() {
     sed -i "s/$OLD_MODIFY/$NEW_MODIFY/g" $VERSION_DIR/$VERSION_FILE
 }
 
-version_modify_bodypack() {
+version_modify_sensor_hub() {
     # Split version into two parts(major, minor)
     LOCAL_VERSION=(`echo $1|sed 's/\./ /g'`)
     [ "$DEBUG" != "" ] && { # Debug print
@@ -104,15 +117,16 @@ version_modify_bodypack() {
     }
 
     for ((index=0; index<${#LOCAL_VERSION[@]}; index++)); do
-	# Decimal to hex conversion
-        VERSION_HEX=`echo "obase=16; ${LOCAL_VERSION[$index]}"|bc`
-
+        # Update in 0.3, no needs to do hex coversion anymore
+        # Reserve the code for future usage
+	    # Decimal to hex conversion
+        # VERSION_HEX=`echo "obase=16; ${LOCAL_VERSION[$index]}"|bc`
         # Need add a 0 while version number <= 15
-        [ "${LOCAL_VERSION[$index]}" -le "15" ] && VERSION_HEX="0$VERSION_HEX"
+        # [ "${LOCAL_VERSION[$index]}" -le "15" ] && VERSION_HEX="0$VERSION_HEX"
 
         # Modify corresponding part(major, minor)
-        OLD_MODIFY=`cat $VERSION_DIR/$VERSION_FILE|grep "${VERSION_TARGET_ARRAY[$index]}  0x"`
-	NEW_MODIFY="#define ${VERSION_TARGET_ARRAY[$index]}  0x$VERSION_HEX"
+        OLD_MODIFY=`cat $VERSION_DIR/$VERSION_FILE|grep "${VERSION_TARGET_ARRAY[$index]}  "`
+        NEW_MODIFY="#define ${VERSION_TARGET_ARRAY[$index]}  ${LOCAL_VERSION[$index]}"
         echo "Old: $OLD_MODIFY, new: $NEW_MODIFY"
         sed -i "s/$OLD_MODIFY/$NEW_MODIFY/g" $VERSION_DIR/$VERSION_FILE
     done
@@ -120,21 +134,24 @@ version_modify_bodypack() {
 
 version_modify() {
 
-   case $VERSION_FILE in
-       "buildinfo.sh" )
-           version_modify_android $1
-           ;;
-       "version.c" )
-           version_modify_bodypack $1
-           ;;
-       *)
-           echo "File to modify version is not found!!"
-           exit 0
-           ;;
-   esac
+    case $VERSION_FILE in
+        "$L_VERSION_FILE" )
+            version_modify_android $1
+            ;;
+        "$BODYPACK_VERSION_FILE" )
+            version_modify_sensor_hub $1
+            ;;
+        "$TRACKER_VERSION_FILE" )
+            version_modify_sensor_hub $1
+            ;;
+        *)
+            echo "File to modify version is not found!!"
+            exit 0
+            ;;
+    esac
 
-   # After modification, check what have you done
-   git diff $VERSION_DIR/$VERSION_FILE
+    # After modification, check what have you done
+    git diff $VERSION_DIR/$VERSION_FILE
 }
 
 version_commit() {
