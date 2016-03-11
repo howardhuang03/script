@@ -1,0 +1,27 @@
+# This file records some useful cmds for common usage
+# Created by Howard Huang 2016/03/11
+
+###########
+#  Linux  #
+###########
+
+
+# Establish a symbolic/static link
+# symbolic link
+ln -sf ~/Dropbox/Code/script ~/share/CodeBase/MoCap/script
+
+# static link 
+ln ~/Dropbox/Code/script/release.sh ~/bin/release.sh
+
+###########
+# Windows #
+###########
+
+###########
+#  MacOS  #
+###########
+
+###########
+# Android #
+###########
+
