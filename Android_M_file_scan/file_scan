@@ -1,0 +1,20 @@
+#!/bin/bash
+# Script for Android M file scan
+
+FILE_LOCATION='/home/howard-huang/share/tool/Android_M_file_scan'
+LIST_FILE=$FILE_LOCATION'/file_list'
+echo "File list location:" $LIST_FILE
+exec < $LIST_FILE
+
+echo "Find CS related file in Android M"
+LINENUMBER=1
+
+while read line
+do
+	echo "================================================"
+	echo "$LINENUMBER $line"
+	find ./$1 -name $line
+	LINENUMBER=$((LINENUMBER+1))
+done
+
+echo "================================================"
