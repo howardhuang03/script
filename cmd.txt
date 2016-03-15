@@ -5,7 +5,6 @@
 #  Linux  #
 ###########
 
-
 # Establish a symbolic/static link
 # symbolic link
 ln -sf ~/Dropbox/Code/script ~/share/CodeBase/MoCap/script
@@ -25,3 +24,14 @@ ln ~/Dropbox/Code/script/release.sh ~/bin/release.sh
 # Android #
 ###########
 
+# Split string in Android without awk & sed
+EX1:
+echo $PATH
+/sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
+EX2:
+for i in ${PATH//:/ }; do echo $i; done
+/sbin
+/vendor/bin
+/system/sbin
+/system/bin
+/system/xbin

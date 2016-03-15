@@ -76,10 +76,10 @@ check_path() {
     for ((index=0; index<${#GIT_ARRAY[@]}; index++)); do
         j=0
 
-	# Parse GIT_ARRAY index
+        # Parse GIT_ARRAY index
         LOCAL_ARRAY=(`echo ${GIT_ARRAY[$index]}|sed 's/,/ /g'`)
 
-	# Check correct git repository
+        # Check correct git repository
         # LOCAL_ARRAY[0] is dir to git source
         GIT_PATH=`pwd|grep ${LOCAL_ARRAY[0]}`
         [ "$GIT_PATH" == "" ] && continue
