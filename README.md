@@ -11,5 +11,8 @@ A script for device log record usage
 In this directory, script is for scan file usage
 File_list text file records Android framework related file
 
+4. content_modify.sh
+A script for specific content modification
+
 ** cmd.txt
 Record some useful cmd for common usage
