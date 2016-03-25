@@ -24,7 +24,7 @@ function show_parameter() {
 
 # Show help
 function show_help() {
-	echo "log.sh -k -s -c [option]"
+	echo "mocap-log.sh -k -s -c [option]"
 	echo "-k: kill old log process"
 	echo "-s: start log process"
 	echo "-c: clean kernel & device logs"
@@ -89,9 +89,9 @@ function main() {
 			clean_log_file $OPTARG
 			;;
 		\?)
-                        show_help
-                        exit 0
-                        ;;
+            show_help
+            exit 0
+            ;;
 		esac
 	done
 }
