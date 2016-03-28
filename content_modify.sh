@@ -1,6 +1,9 @@
 #!/bin/bash
 
-MOCAP_DIR=$HOME/share/CodeBase/MoCap
+# include
+. ~/Dropbox/Code/script/include/path.sh
+
+MOCAP_PATH=$(Check_working_PATH)
 GIT_CONFIG=.git/config
 
 NEW_MODIFY="inhouse.htcstudio"
