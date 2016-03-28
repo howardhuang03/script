@@ -6,7 +6,7 @@
 
 CODE_PATH=$(Check_working_PATH)
 CPP_PATH=$CODE_PATH/mocap-cpp.git/MocapRPC
-GO_PATH=$CODE_PATH/mocap-go.git/src/htc.com/mocap-go/rpc/protos
+GO_PATH=$CODE_PATH/godir/src/htc.com/mocap-go/rpc/protos
 
 PROTO_FILE=mocaprpc.proto
 
