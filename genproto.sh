@@ -6,6 +6,7 @@
 
 CODE_PATH=$(Check_working_PATH)
 CPP_PATH=$CODE_PATH/mocap-cpp.git/MocapRPC
+CPP_ANDROID_PATH=$CODE_PATH/mocap-cpp.git/Android/MocapRPC/app/src/main/jni
 GO_PATH=$CODE_PATH/godir/src/htc.com/mocap-go/rpc/protos
 
 PROTO_FILE=mocaprpc.proto
@@ -27,6 +28,12 @@ proto_gen_cpp() {
     cp *.grpc.pb.h $CPP_PATH
     cp *.pb.cc $CPP_PATH
     cp *.pb.h $CPP_PATH
+
+    # Copy generated proto file to corresponding cpp path
+    cp *.grpc.pb.cc $CPP_ANDROID_PATH
+    cp *.grpc.pb.h $CPP_ANDROID_PATH
+    cp *.pb.cc $CPP_ANDROID_PATH
+    cp *.pb.h $CPP_ANDROID_PATH
 }
 
 proto_gen_go() {
