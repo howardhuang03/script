@@ -97,5 +97,6 @@ function main() {
 }
 
 # Start main process
+[ -z "$1" ] && main -h
 main "$@"
 
