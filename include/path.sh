@@ -2,10 +2,10 @@
 # This script is for different OS platform working directory definition
 
 # Linux working path
-LINUX_PATH=/home/howard-huang/share/CodeBase/MoCap
+LINUX_PATH=/home/howardhuang/share/workspace
 
 # Mac OS X working path
-MAC_PATH=/Users/howardhuang/MoCap/CodeBase
+MAC_PATH=/Users/howardhuang/Project
 
 Check_working_PATH() {
     case "$(uname -s)" in
