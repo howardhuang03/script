@@ -14,5 +14,8 @@ File_list text file records Android framework related file
 4. content_modify.sh
 A script for specific content modification
 
+5. fw_check.sh
+A script for firstboot checking on customized openwrt/lede firmware
+
 ** cmd.txt
 Record some useful cmd for common usage
