@@ -108,11 +108,11 @@ check_status() {
 }
 
 do_sysupgrade() {
-	local target=$sysupgradefw
+	local target=/tmp/$sysupgradefw
 
-	if [ -f "/tmp/$target" ]; then
+	if [ ! -f "$target" ]; then
 		echo "Download sysupgrade firmware"
-		scp $hwmach:share/$target /tmp
+		scp $hwmach:share$target /tmp
 	fi
 
 	echo "Performing sysupgrade with $target"
