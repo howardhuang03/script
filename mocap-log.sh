@@ -5,6 +5,7 @@
 
 TIME=`date +"%Y%m%d%H%M"`
 
+PROGNAME=$(basename $0)
 MOCAP_LOG_DIR="/home/howard-huang/share/log/mocap-log"
 KERNEL_LOG_DIR="$MOCAP_LOG_DIR/kernel"
 DEVICE_LOG_DIR="$MOCAP_LOG_DIR/device"
@@ -15,22 +16,27 @@ DEVICE_LOG="$DEVICE_LOG_DIR/device-$TIME.log"
 
 # Show debug parameter
 function show_parameter() {
-	echo $TIME
-	echo $KERNEL_LOG_DIR
-	echo $DEVICE_LOG_DIR
-	echo $KERNEL_LOG
-	echo $DEVICE_LOG
+	cat <<- EOF
+	$TIME
+	$KERNEL_LOG_DIR
+	$DEVICE_LOG_DIR
+	$KERNEL_LOG
+	$DEVICE_LOG
+	EOF
 }
 
 # Show help
 function show_help() {
-	echo "mocap-log.sh -k -s -c [option]"
-	echo "-k: kill old log process"
-	echo "-s: start log process"
-	echo "-c: clean kernel & device logs"
-	echo "    [option]: kernel"
-	echo "              device"
-	echo "              all"
+	cat <<- EOF
+	$PROGNAME -k -s -c [option]
+	Usage:
+	  -k: kill old log process
+	  -s: start log process
+	  -c: clean kernel & device logs
+	      [option]: kernel
+	                device
+	                all
+	EOF
 }
 
 function clean_log_file() {
@@ -89,9 +95,9 @@ function main() {
 			clean_log_file $OPTARG
 			;;
 		\?)
-            show_help
-            exit 0
-            ;;
+      show_help
+      exit 0
+      ;;
 		esac
 	done
 }
@@ -99,4 +105,3 @@ function main() {
 # Start main process
 [ -z "$1" ] && main -h
 main "$@"
-

@@ -4,6 +4,7 @@
 # include
 . ~/Dropbox/Code/script/include/path.sh
 
+PROGNAME=$(basename $0)
 CODE_PATH=$(Check_working_PATH)
 CPP_PATH=$CODE_PATH/mocap-cpp.git/MocapRPC
 CPP_ANDROID_PATH=$CODE_PATH/mocap-cpp.git/Android/MocapRPC/app/src/main/jni
@@ -13,9 +14,12 @@ PROTO_FILE=mocaprpc.proto
 
 # Show help
 function show_help() {
-	echo "$0 -c -g"
-	echo "-c: Generate CPP grpc code"
-	echo "-g: Generate GO grpc code"
+	cat <<- EOF
+	$PROGNAME -c -g
+	Usage:
+	  -c: Generate CPP grpc code
+	  -g: Generate GO grpc code
+	EOF
 }
 
 proto_gen_cpp() {
@@ -54,11 +58,11 @@ function main() {
 			;;
 		g)
 			proto_gen_go
-			;;
+      ;;
 		\?)
-            show_help
-            exit 0
-            ;;
+      show_help
+      exit 0
+      ;;
 		esac
 	done
 }
@@ -66,4 +70,3 @@ function main() {
 # Start main process
 [ -z "$1" ] && main -h
 main "$@"
-
