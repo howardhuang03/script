@@ -1,0 +1,48 @@
+[
+   {
+      "maintainer" : "george.h",
+      "matched_ads" : [],
+      "intro" : "壽喜燒是以軟嫩充滿油花的牛肉片、\r\n搭配當季清甜的時蔬淋上精心熬煮的風味醬汁；\r\n食>用時，將生雞蛋打碎攪勻，沾取蛋汁食用。\r\n僅有少量湯汁，在日本又稱為「無湯的火鍋」。",
+      "category" : "美食及購物_餐廳",
+      "hotspots" : [
+         {
+            "name" : "品鼎殿日式壽喜燒",
+            "id" : "02010312"
+         }
+      ],
+      "normalized_tel1" : "0229569302",
+      "image" : "020103124130220.png",
+      "tel1" : "02-2956-9302",
+      "name" : "品鼎殿日式壽喜燒",
+      "status" : "blocked",
+      "matched_areas" : [
+         {  
+            "$oid" : "552e887a8538c927678c03b4"
+         },
+         {  
+            "$oid" : "552e887a8538c927678c03b5"
+         },
+         {  
+            "$oid" : "547cbfae8538c9700e4856b0"
+         },
+         {  
+            "$oid" : "547cbfae8538c9700e4856ae"
+         }
+      ],
+      "zip" : "220",
+      "sql_id" : 0,
+      "address" : "新北市板橋區中山路１段24號2樓",
+      "opening_image" : "020103121130115.gif",
+      "_id" : { 
+         "$oid" : "53d6bc1a7b63c21c19f17f83"
+      },
+      "official_site" : "http://www.pindingdain.url.tw/index.html",
+      "loc" : { 
+         "type" : "Point",
+         "coordinates" : [
+            121.4602326077,
+            25.008215407844
+         ]
+      }
+   }
+]
