@@ -26,6 +26,10 @@ Some useful script or knowledge here
 
     A simple python script for id parsing
 
+7. genplay.sh
+
+    A script for generating fake json string and sending to Kafka broker
+
 ## cmd.txt
 
     Record some useful cmd for common usage
