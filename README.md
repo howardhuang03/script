@@ -30,6 +30,10 @@ Some useful script or knowledge here
 
     A script for generating fake json string and sending to Kafka broker
 
+8. kafka-script/
+
+   Kafka operation written in scripts
+
 ## cmd.txt
 
     Record some useful cmd for common usage
