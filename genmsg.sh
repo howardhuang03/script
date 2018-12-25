@@ -3,9 +3,7 @@
 
 PROGNAME=$(basename $0)
 # Modify PATH to the KAFKA parent path
-PLAYFILE=test.txt
-PWD=$(pwd)
-FILEPATH=`echo $PWD`
+PLAYFILE=/tmp/test.txt
 
 # Message default value
 LEN=10
@@ -15,7 +13,7 @@ MEDIAID=`echo $START |cut -b8-13`
 
 # Kafka parameter
 ADDR=172.16.2.26:10092
-KAFKA=kafka_2.11-0.10.2.1
+KAFKA=/opt/kafka_2.11-0.10.2.1
 
 # Show help
 function show_help() {
@@ -29,16 +27,16 @@ EOF
 }
 
 template_W() {
-    echo "{\"1\":320,\"2\":[$START],\"3\":15,\"4\":2,\"5\":0,\"6\":0,\"7\":$LENMILLIS,\"8\":1,\"9\":[$LENMILLIS],\"10\":$START,\"11\":635,\"12\":1,\"13\":\"14\",\"15\":3}"
+    echo "{\"accountID\":99,\"estimatedDist\":320,\"attentionStartTime\":[$START],\"ageValue\":15,\"gender\":2,\"mood\":0,\"extraFeatures\":0,\"duration\":$LENMILLIS,\"ageBracket\":1,\"attentionTime\":[$LENMILLIS],\"startTime\":$START,\"watcherID\":635,\"numGlances\":1,\"boxID\":\"testID\",\"status\":3}"
 }
 
 template_O() {
-    echo "{\"1\":90000,\"2\":10,\"3\":25,\"4\":$START,\"5\":\"6\",\"7\":0}"
+    echo "{\"accountID\":99,\"duration\":90000,\"viewers\":10,\"count\":25,\"startTime\":$START,\"boxID\":\"testID\",\"status\":0}"
 }
 
 template_M() {
     END=`expr $START + $LENMILLIS`
-    echo "{\"1\":$LENMILLIS,\"2\":\"media-$MEDIAID\",\"3\":$START,\"4\":$END,\"5\":0,\"6\":\"testID\"}"
+    echo "{\"accountID\":99,\"length\":$LENMILLIS,\"mediaId\":\"media-$MEDIAID\",\"startTime\":$START,\"endTime\":$END,\"reserved\":0,\"boxID\":\"testID\",\"playlist\":\"test_playlist\"}"
 }
 
 function template() {
@@ -93,8 +91,7 @@ function run_kafka() {
 
     touch $PLAYFILE
     echo $msg > $PLAYFILE
-    cd /opt
-    $KAFKA/bin/kafka-console-producer.sh --broker-list $ADDR --topic $TOPIC < $FILEPATH/$PLAYFILE
+    $KAFKA/bin/kafka-console-producer.sh --broker-list $ADDR --topic $TOPIC < $PLAYFILE
 }
 
 function main() {
