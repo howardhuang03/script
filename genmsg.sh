@@ -27,16 +27,16 @@ EOF
 }
 
 template_W() {
-    echo "{\"accountID\":99,\"estimatedDist\":320,\"attentionStartTime\":[$START],\"ageValue\":15,\"gender\":2,\"mood\":0,\"extraFeatures\":0,\"duration\":$LENMILLIS,\"ageBracket\":1,\"attentionTime\":[$LENMILLIS],\"startTime\":$START,\"watcherID\":635,\"numGlances\":1,\"boxID\":\"testID\",\"status\":3}"
+    echo "{\"accountID\":99,\"timezone\":\"Asia/Taipei\",\"estimatedDist\":320,\"attentionStartTime\":[$START],\"ageValue\":15,\"gender\":2,\"mood\":0,\"extraFeatures\":0,\"duration\":$LENMILLIS,\"ageBracket\":1,\"attentionTime\":[$LENMILLIS],\"startTime\":$START,\"watcherID\":635,\"numGlances\":1,\"boxID\":\"testID\",\"status\":3}"
 }
 
 template_O() {
-    echo "{\"accountID\":99,\"duration\":90000,\"viewers\":10,\"count\":25,\"startTime\":$START,\"boxID\":\"testID\",\"status\":0}"
+    echo "{\"accountID\":99,\"timezone\":\"Asia/Taipei\",\"duration\":90000,\"viewers\":10,\"count\":25,\"startTime\":$START,\"boxID\":\"testID\",\"status\":0}"
 }
 
 template_M() {
     END=`expr $START + $LENMILLIS`
-    echo "{\"accountID\":99,\"length\":$LENMILLIS,\"mediaId\":\"media-$MEDIAID\",\"startTime\":$START,\"endTime\":$END,\"reserved\":0,\"boxID\":\"testID\",\"playlist\":\"test_playlist\"}"
+    echo "{\"accountID\":99,\"timezone\":\"Asia/Taipei\",\"length\":$LENMILLIS,\"mediaId\":\"media-$MEDIAID\",\"startTime\":$START,\"endTime\":$END,\"reserved\":0,\"boxID\":\"testID\",\"playlist\":\"test_playlist\"}"
 }
 
 function template() {
