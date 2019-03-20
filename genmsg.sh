@@ -36,7 +36,7 @@ template_O() {
 
 template_M() {
     END=`expr $START + $LENMILLIS`
-    echo "{\"accountID\":99,\"timezone\":\"Asia/Taipei\",\"length\":$LENMILLIS,\"mediaId\":\"media-$MEDIAID\",\"startTime\":$START,\"endTime\":$END,\"reserved\":0,\"boxID\":\"testID\",\"playlist\":\"test_playlist\"}"
+    echo "{\"accountID\":99,\"timezone\":\"Asia/Taipei\",\"length\":$LENMILLIS,\"mediaID\":\"media-$MEDIAID\",\"startTime\":$START,\"endTime\":$END,\"reserved\":0,\"boxID\":\"testID\",\"playlist\":\"test_playlist\"}"
 }
 
 function template() {
